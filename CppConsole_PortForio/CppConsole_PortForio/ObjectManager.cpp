@@ -32,12 +32,12 @@ void ObjectManager::Initialize()
 	
 	for (int i = 0; i < 4; i++)
 	{
-		m_pKey[i] = ObjectFactory<Key>::CreateObject();
+		vec_Key.push_back(ObjectFactory<Key>::CreateObject());
 	}
 	m_pKeyUI = ObjectFactory<KeyUi>::CreateObject();
 
-	Vector3 KeyPoint[4];
 	{
+		Vector3 KeyPoint[4];
 		int i = 0;
 
 		for (int _x = 1; _x < 3; _x++)
@@ -67,16 +67,20 @@ void ObjectManager::Initialize()
 			KeyPoint[i] = Vector3((float)x, (float)y);
 			i++;
 		}
-	}
-	for (int i = 0; i < 4; i++)
-	{	
-		m_pKey[i]->SetPosition(Vector3((float)KeyPoint[i].x, (float)KeyPoint[i].y));
-		((Key*)m_pKey[i])->SetGameLevel(i + 1);
-	}
 
-	for (int i = 1; i < 4; i++)
+		int key_count = 0;
+		for (vector<Object*>::iterator iter = vec_Key.begin(); iter != vec_Key.end(); ++iter)
+		{	
+			(*iter)->SetPosition(Vector3((float)KeyPoint[key_count].x, (float)KeyPoint[key_count].y));
+			((Key*)(*iter))->SetGameLevel(key_count + 1);
+			
+			key_count++;
+		}
+
+	}
+	for (vector<Object*>::iterator iter = vec_Key.begin() + 1; iter != vec_Key.end(); ++iter)
 	{
-		Vector3 WallPosition = m_pKey[i]->GetPosition();
+		Vector3 WallPosition = (*iter)->GetPosition();
 
 		if (Map[(int)WallPosition.y][(int)WallPosition.x - 1] == 0)
 		{
@@ -259,7 +263,7 @@ void ObjectManager::Render()
 					{
 						if (isBreak < 4)
 						{
-							if (MathManager::GetDistance(m_pKey[isBreak]->GetPosition(), Vector3((float)x, (float)y)) <= 2)
+							if (MathManager::GetDistance(vec_Key[isBreak]->GetPosition(), Vector3((float)x, (float)y)) <= 2)
 							{
 								switch (Map[y][x])
 								{
@@ -285,7 +289,7 @@ void ObjectManager::Render()
 									break;
 								}
 
-								m_pKey[isBreak]->Render();
+								vec_Key[isBreak]->Render();
 							}
 						}
 						else
@@ -323,10 +327,10 @@ void ObjectManager::Render()
 
 			for (int i = 0; i < 4; ++i)
 			{
-				if (m_pKey[i] != nullptr)
+				if (vec_Key[i] != nullptr)
 				{
-					if (MathManager::GetDistance(PlayerPos, m_pKey[i]->GetPosition()) <= 5)
-						m_pKey[i]->Render();
+					if (MathManager::GetDistance(PlayerPos, vec_Key[i]->GetPosition()) <= 5)
+						vec_Key[i]->Render();
 				}
 			}
 
@@ -393,9 +397,11 @@ void ObjectManager::Release()
 
 	for (int i = 0; i < KeyCount; i++)
 	{
-		SAFE_RELEASE(m_pKey[i]);
+		SAFE_RELEASE(vec_Key[i]);
 	}
 
+	vec_Key.clear();
+	
 	SAFE_RELEASE(m_pKeyUI);
 }
 
@@ -403,24 +409,24 @@ void ObjectManager::BreakWall(int _index)
 {
 	if (_index < 4)
 	{
-		if (Map[(int)m_pKey[_index]->GetPosition().y][(int)m_pKey[_index]->GetPosition().x - 1] == 7)
-		{
-			Map[(int)m_pKey[_index]->GetPosition().y][(int)m_pKey[_index]->GetPosition().x - 1] = 0;
-		}
-
-		if (Map[(int)m_pKey[_index]->GetPosition().y][(int)m_pKey[_index]->GetPosition().x + 1] == 7)
-		{
-			Map[(int)m_pKey[_index]->GetPosition().y][(int)m_pKey[_index]->GetPosition().x + 1] = 0;
-		}
-
-		if (Map[(int)m_pKey[_index]->GetPosition().y - 1][(int)m_pKey[_index]->GetPosition().x] == 7)
-		{
-			Map[(int)m_pKey[_index]->GetPosition().y - 1][(int)m_pKey[_index]->GetPosition().x] = 0;
-		}
-
-		if (Map[(int)m_pKey[_index]->GetPosition().y + 1][(int)m_pKey[_index]->GetPosition().x] == 7)
-		{
-			Map[(int)m_pKey[_index]->GetPosition().y + 1][(int)m_pKey[_index]->GetPosition().x] = 0;
+		if (Map[(int)vec_Key[_index]->GetPosition().y][(int)vec_Key[_index]->GetPosition().x - 1] == 7)
+		{			 
+			Map[(int)vec_Key[_index]->GetPosition().y][(int)vec_Key[_index]->GetPosition().x - 1] = 0;
+		}			 
+					 
+		if (Map[(int)vec_Key[_index]->GetPosition().y][(int)vec_Key[_index]->GetPosition().x + 1] == 7)
+		{			 
+			Map[(int)vec_Key[_index]->GetPosition().y][(int)vec_Key[_index]->GetPosition().x + 1] = 0;
+		}			 
+					 
+		if (Map[(int)vec_Key[_index]->GetPosition().y - 1][(int)vec_Key[_index]->GetPosition().x] == 7)
+		{			 
+			Map[(int)vec_Key[_index]->GetPosition().y - 1][(int)vec_Key[_index]->GetPosition().x] = 0;
+		}			 
+					 
+		if (Map[(int)vec_Key[_index]->GetPosition().y + 1][(int)vec_Key[_index]->GetPosition().x] == 7)
+		{			 
+			Map[(int)vec_Key[_index]->GetPosition().y + 1][(int)vec_Key[_index]->GetPosition().x] = 0;
 		}
 	}
 	if(_index >= 4)
@@ -435,12 +441,12 @@ void ObjectManager::BreakWall(int _index)
 
 void ObjectManager::InMiniGame(int _index)
 {
-	((HitPoint*)m_pHitPoint)->SetLevel(((Key*)m_pKey[_index])->GetGameLevel());
+	((HitPoint*)m_pHitPoint)->SetLevel(((Key*)vec_Key[_index])->GetGameLevel());
 }
 
 void ObjectManager::KeyErease(int _keyCount)
 {	
-	SAFE_RELEASE(m_pKey[_keyCount]);
+	SAFE_RELEASE(vec_Key[_keyCount]);
 	ViewNextKey = true;
 	isBreak = _keyCount + 1;
 
@@ -451,7 +457,7 @@ void ObjectManager::KeyErease(int _keyCount)
 void ObjectManager::PlayKeyUiAni(Vector3 _startpos, int _keyCount)
 {
 	((KeyUi*)m_pKeyUI)->AddKeyCount();
-	((KeyUi*)m_pKeyUI)->SetKeyAni(_startpos, m_pKey[_keyCount]->GetColor());
+	((KeyUi*)m_pKeyUI)->SetKeyAni(_startpos, vec_Key[_keyCount]->GetColor());
 }
 
 void ObjectManager::ReturnMaze()

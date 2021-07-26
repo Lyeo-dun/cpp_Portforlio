@@ -44,12 +44,10 @@ void EndingPlayer::Update()
 			}
 		}
 	}
-
 }
 
 void EndingPlayer::Render()
 {
-
 	DoubleBuffer::GetInstance()->WriteBuffer((int)TransInfo.Position.x * 2, (int)TransInfo.Position.y, Texture, Color);
 }
 

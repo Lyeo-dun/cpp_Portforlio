@@ -52,9 +52,6 @@
     <Filter Include="소스 파일\03.Object\MiniObj">
       <UniqueIdentifier>{7aa61138-20ee-4b38-93e8-32122f7c311a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\03.Object\MiniObj\Bullet">
-      <UniqueIdentifier>{f8d8f20d-be1d-4eaa-b08f-f63021fd7a16}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\03.Object\MiniObj\MiniGamebar">
       <UniqueIdentifier>{7bc2a7c1-ef33-4180-85d0-369f2d5ee19b}</UniqueIdentifier>
     </Filter>
@@ -153,9 +150,6 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>소스 파일\99. Manager\ObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>소스 파일\03.Object\MiniObj\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="MiniGameBar.h">
       <Filter>소스 파일\03.Object\MiniObj\MiniGamebar</Filter>
     </ClInclude>
@@ -235,9 +229,6 @@
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>소스 파일\99. Manager\ObjectManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>소스 파일\03.Object\MiniObj\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="MiniGameBar.cpp">
       <Filter>소스 파일\03.Object\MiniObj\MiniGamebar</Filter>

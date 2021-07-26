@@ -45,7 +45,7 @@ void EndingManager::Initialize()
 
 	for (int i = 0; i < 8; ++i)
 	{
-		m_pParticle[i] = ObjectFactory<StarParticle>::CreateObject();
+		m_pParticle.push_back(ObjectFactory<StarParticle>::CreateObject());
 	}
 
 	((StarParticle*)m_pParticle[0])->SetDirection(Vector3(1, 1));
@@ -56,7 +56,6 @@ void EndingManager::Initialize()
 	((StarParticle*)m_pParticle[5])->SetDirection(Vector3(1, 0));
 	((StarParticle*)m_pParticle[6])->SetDirection(Vector3(0, -1));
 	((StarParticle*)m_pParticle[7])->SetDirection(Vector3(0, 1));
-
 	
 	isParticle = false;
 	ParticleControl = 1;

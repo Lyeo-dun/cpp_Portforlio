@@ -2,17 +2,16 @@
 #include "Object.h"
 class KeyUi : public Object
 {
-	char* Texture;
+	map<string, char*> texture;
+
 	int KeyCount;
 	bool isAni;
 
-	char* KeyTexture;
 	Vector3 KeyPos;
 	int AfterKeyCount;
 	int EatKeyColor;
 
-	ULONGLONG Time;
-	ULONGLONG AddTime;
+	map<string, ULONGLONG> Time;
 	bool checkAddTime;
 public:
 	void AddKeyCount() { AfterKeyCount += 1; }

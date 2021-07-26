@@ -17,7 +17,7 @@ public:
 	}
 private:
 	Object* m_pPlayer;
-	Object* m_pKey[4];
+	vector<Object*> vec_Key;
 	Object* m_pKeyUI;
 
 	//bool EditMode = false;
@@ -95,7 +95,7 @@ public:
 	void AddKeyCount() { KeyEatCount++; }
 	bool GetClear() { return Clear; }
 
-	Object* GetKey(int _index) { return m_pKey[_index]; }
+	Object* GetKey(int _index) { return vec_Key[_index]; }
 	//rect view
 	////Draw offset
 	//Vector3 offset;

@@ -3,12 +3,12 @@
 
 class Menu : public Scene
 {
-	char* LogoText[7];
+	vector<char*> LogoText;
 	Transforms Logo_TransInfo;
 	bool Logo_Ani;
 
 	int Choice;
-	char* ChoiceMenu[3];
+	map<int, char*> ChoiceMenu;
 	Transforms Choice_TransInfo;
 	bool ViewChioce;
 	

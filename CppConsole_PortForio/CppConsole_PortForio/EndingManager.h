@@ -45,7 +45,7 @@ private:
 	Vector3 StartPoint;
 	bool isPlayerAni;
 
-	Object* m_pParticle[8];
+	vector<Object*> m_pParticle;
 	int ParticleControl;
 	bool isParticle;
 

@@ -13,20 +13,22 @@ KeyUi::~KeyUi()
 
 void KeyUi::Initialize()
 {
-	Texture = (char*)"ขา  ";
+	texture.insert(make_pair("Static", (char*)"ขา  "));
+
 	KeyCount = 0;
 	isAni = false;
-	TransInfo.Position = Vector3(float(41 - strlen(Texture)), 22.0f);
+
+	map<string, char*>::iterator iter = texture.find("Static");
+	TransInfo.Position = Vector3(float(41 - strlen((*iter).second)), 22.0f);
 	Color = 15;
 
-	KeyTexture = (char*)"ขา";
+	texture.insert(make_pair("Ani", (char*)"ขา"));
 	KeyPos = Vector3(0, 0);
 
 	AfterKeyCount = 0;
 
-	Time = GetTickCount64();
-
-	AddTime = GetTickCount64();
+	Time.insert(make_pair("Frame", GetTickCount64()));
+	Time.insert(make_pair("AddCountTime", GetTickCount64()));
 	checkAddTime = false;
 }
 
@@ -34,7 +36,7 @@ void KeyUi::Update()
 {
 	if (isAni)
 	{
-			if (Time + 50 < GetTickCount64())
+			if (Time.find("Frame")->second + 50 < GetTickCount64())
 			{
 				if (KeyPos.x < TransInfo.Position.x - 2)
 				{
@@ -56,10 +58,10 @@ void KeyUi::Update()
 					{
 						checkAddTime = true;
 						Color = EatKeyColor;
-						
-						AddTime = GetTickCount64();
+
+						Time.find("AddCountTime")->second = GetTickCount64();
 					}
-					if (AddTime + 300 < GetTickCount64())
+					if (Time.find("AddCountTime")->second + 300 < GetTickCount64())
 					{
 						KeyCount = AfterKeyCount;
 						Color = 15;
@@ -69,7 +71,7 @@ void KeyUi::Update()
 					}
 				}
 
-			Time = GetTickCount64();
+				Time.find("Frame")->second = GetTickCount64();
 		}
 	}
 }
@@ -78,14 +80,16 @@ void KeyUi::Render()
 {
 	if (isAni)
 	{
+		map<string, char*>::iterator iter = texture.find("Ani");
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			(int)KeyPos.x * 2 + 4,
-			(int)KeyPos.y, KeyTexture, Color);
+			(int)KeyPos.y, (*iter).second, Color);
 	}
 
+	map<string, char*>::iterator iter = texture.find("Static");
 	DoubleBuffer::GetInstance()->WriteBuffer(
 		(int)TransInfo.Position.x * 2,
-		(int)TransInfo.Position.y, Texture, Color);
+		(int)TransInfo.Position.y, (*iter).second, Color);
 	
 	DoubleBuffer::GetInstance()->WriteBuffer(
 		(int)TransInfo.Position.x * 2 + 4,

@@ -4,7 +4,7 @@
 class Logo : public Scene
 {
 	int StarColor;
-	char* LogoText[7];
+	vector<char*> LogoText;
 	Transforms TransInfo;
 	ULONGLONG Time;
 
