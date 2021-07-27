@@ -3,18 +3,17 @@
 
 class Menu : public Scene
 {
-	vector<char*> LogoText;
-	Transforms Logo_TransInfo;
-	bool Logo_Ani;
 
-	int Choice;
-	map<int, char*> ChoiceMenu;
-	Transforms Choice_TransInfo;
+	map<string, vector<char*>> Text;
+	
+	int StarColor;
+	
+	map<string, Vector3> Trans;	
+
+	bool Logo_Ani;
 	bool ViewChioce;
 	
-	char* Star;
-	Transforms Star_TransInfo;
-	int StarColor;
+	int Choice;
 
 	ULONGLONG Time;
 

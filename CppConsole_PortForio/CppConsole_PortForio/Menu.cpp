@@ -13,6 +13,7 @@ Menu::~Menu()
 
 void Menu::Initialize()
 {
+	vector<char*> LogoText;
 	LogoText.push_back((char*)" __    __   ____  __ __  _____ ______   ____  ____  ");
 	LogoText.push_back((char*)"|  |__|  | /    ||  |  |/ ___/|      | /    ||    \\ ");
 	LogoText.push_back((char*)"|  |  |  ||  o  ||  |  (   \\_ |      ||  o  ||  D  )");
@@ -21,27 +22,35 @@ void Menu::Initialize()
 	LogoText.push_back((char*)" \\      / |  |  ||     |\\    |  |  |  |  |  ||  .  \\");
 	LogoText.push_back((char*)"  \\_/\\_/  |__|__||____/  \\___|  |__|  |__|__||__|\\_|");
 
-	float x = 41 - float(strlen(LogoText[0]) / 2);
+	Text.insert(make_pair("Logo", LogoText));
+	
+	float x = 41 - float(strlen(LogoText.front()) / 2);
 	float y = 21 / 2 - 3.5f;
 
-	Logo_TransInfo.Position = Vector3(x, y);
+	Trans.insert(make_pair("Logo", Vector3(x, y)));
 	Logo_Ani = true;
 
-	ChoiceMenu.insert(make_pair(1, (char*)"게임 시작"));
-	ChoiceMenu.insert(make_pair(2, (char*)"게임 설명"));
-	ChoiceMenu.insert(make_pair(3, (char*)"게임 종료"));
+	vector<char*> ChoiceMenu;
+	ChoiceMenu.push_back((char*)"게임 시작");
+	ChoiceMenu.push_back((char*)"게임 설명");
+	ChoiceMenu.push_back((char*)"게임 종료");
+	Text.insert(make_pair("Choice", ChoiceMenu));
 	
-	x = 41 - (float)(strlen(ChoiceMenu.find(1)->second) / 2);
-	y = Logo_TransInfo.Position.y + 8.0f;
+	x = 41 - (float)(strlen(ChoiceMenu.front()) / 2);
+	y = Trans.find("Logo")->second.y + 8.0f;
 
-	Choice_TransInfo.Position = Vector3(x, y);
+	Trans.insert(make_pair("Choice", Vector3(x, y)));
 	ViewChioce = false;
 	Choice = 1;
 
-	Star = (char*)"★";
-	x = Logo_TransInfo.Position.x + strlen(LogoText[6])- 1;
-	y = Logo_TransInfo.Position.y + 6.0f;
-	Star_TransInfo.Position = Vector3(x, y);
+	vector<char*> Star;
+	Star.push_back((char*)"★");
+	Text.insert(make_pair("Star", Star));
+
+	x = Trans.find("Logo")->second.x + strlen(LogoText.back())- 1;
+	y = Trans.find("Logo")->second.y + 6.0f;
+
+	Trans.insert(make_pair("Star", Vector3(x, y)));
 	StarColor = rand() % 6 + 9;
 
 	Time = GetTickCount64(); 
@@ -53,20 +62,20 @@ void Menu::Update()
 	{
 		if (Logo_Ani)
 		{
-			Logo_TransInfo.Position.y -= 0.3f; 
-			Star_TransInfo.Position.y = Logo_TransInfo.Position.y + 6.0f;
-			if (Logo_TransInfo.Position.y < 21 / 2 - 6.0f)
+			Trans.find("Logo")->second.y -= 0.3f;
+			Trans.find("Star")->second.y = Trans.find("Logo")->second.y + 6.0f;
+			if (Trans.find("Logo")->second.y < 21 / 2 - 6.0f)
 			{
 				Logo_Ani = false;
 			}
 		}
 		else
 		{
-			if (Choice_TransInfo.Position.x - 2 < Star_TransInfo.Position.x)
-				Star_TransInfo.Position.x -= 1.5f;
+			if (Trans.find("Choice")->second.x - 2 < Trans.find("Star")->second.x)
+				Trans.find("Star")->second.x -= 1.5f;
 
-			if (Choice_TransInfo.Position.y > Star_TransInfo.Position.y)
-				Star_TransInfo.Position.y ++;
+			if (Trans.find("Choice")->second.y > Trans.find("Star")->second.y)
+				Trans.find("Star")->second.y ++;
 
 			if (ViewChioce)
 			{
@@ -75,7 +84,7 @@ void Menu::Update()
 					if (Choice < 3)
 					{
 						Choice++;
-						Star_TransInfo.Position.y++;
+						Trans.find("Star")->second.y++;
 						StarColor++;
 						
 						if (StarColor > 14) 
@@ -89,7 +98,7 @@ void Menu::Update()
 					if (Choice > 1)
 					{
 						Choice--;
-						Star_TransInfo.Position.y--;
+						Trans.find("Star")->second.y--;
 						StarColor++;
 
 						if (StarColor > 14) 
@@ -105,8 +114,8 @@ void Menu::Update()
 	}
 
 	
-	if (Choice_TransInfo.Position.x - 2 >= Star_TransInfo.Position.x 
-		&& Choice_TransInfo.Position.y <= Star_TransInfo.Position.y)
+	if (Trans.find("Choice")->second.x - 2 >= Trans.find("Star")->second.x
+		&& Trans.find("Choice")->second.y <= Trans.find("Star")->second.y)
 	{
 		ViewChioce = true;
 	}
@@ -136,25 +145,28 @@ void Menu::Render()
 	//로고 출력
 	{
 		int i = 0;
-		for (vector<char*>::iterator iter = LogoText.begin(); iter != LogoText.end(); ++iter)
+		for (vector<char*>::iterator iter = Text.find("Logo")->second.begin(); iter != Text.find("Logo")->second.end(); ++iter)
 		{
-			DoubleBuffer::GetInstance()->WriteBuffer((int)Logo_TransInfo.Position.x, (int)Logo_TransInfo.Position.y + i, LogoText[i], 15);
+			DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Logo")->second.x, (int)Trans.find("Logo")->second.y + i, *iter, 15);
 			i++;
 		}
 	}
 
-	DoubleBuffer::GetInstance()->WriteBuffer((int)Star_TransInfo.Position.x, (int)Star_TransInfo.Position.y, Star, StarColor);
+	for (vector<char*>::iterator iter = Text.find("Star")->second.begin(); iter != Text.find("Star")->second.end(); ++iter)
+	{
+		DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Star")->second.x, (int)Trans.find("Star")->second.y, *iter, StarColor);
+	}
 
 	//메뉴 출력
 	if (ViewChioce)
 	{
 		int i = 0;
-		for (map<int, char*>::iterator iter = ChoiceMenu.begin(); iter != ChoiceMenu.end(); ++iter)
+		for (vector<char*>::iterator iter = Text.find("Choice")->second.begin(); iter != Text.find("Choice")->second.end(); ++iter)
 		{
-			DoubleBuffer::GetInstance()->WriteBuffer((int)Choice_TransInfo.Position.x, int(Choice_TransInfo.Position.y + i), iter->second, 8);
+			DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Choice")->second.x, int(Trans.find("Choice")->second.y + i), *iter, 8);
 			if (Choice - 1 == i)
 			{
-				DoubleBuffer::GetInstance()->WriteBuffer((int)Choice_TransInfo.Position.x, int(Choice_TransInfo.Position.y + i), iter->second);
+				DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Choice")->second.x, int(Trans.find("Choice")->second.y + i), *iter);
 			}
 			++i;
 		}

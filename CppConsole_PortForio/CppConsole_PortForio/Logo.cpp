@@ -53,7 +53,7 @@ void Logo::Render()
 		int i = 0;
 		for (vector<char*>::iterator iter = LogoText.begin(); iter != LogoText.end(); ++iter)
 		{
-			DoubleBuffer::GetInstance()->WriteBuffer((int)TransInfo.Position.x, (int)TransInfo.Position.y + i, LogoText[i], 15);
+			DoubleBuffer::GetInstance()->WriteBuffer((int)TransInfo.Position.x, (int)TransInfo.Position.y + i, *iter, 15);
 			i++;
 		}
 	}
