@@ -6,11 +6,11 @@ class Option : public Scene
 	ULONGLONG StartTime;
 	ULONGLONG Time;
 
-	char* Option_Button[2];
-	Transforms Option_Trans[2];
-
+	vector<char*> Text;
+	vector<Vector3> TextPos;
+	
 	char* Star;
-	Transforms Star_Trans;
+	Vector3 StarPos;
 	int StarColor;
 
 	int Choice;

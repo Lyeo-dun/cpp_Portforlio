@@ -112,7 +112,6 @@ void Menu::Update()
 
 		Time = GetTickCount64();
 	}
-
 	
 	if (Trans.find("Choice")->second.x - 2 >= Trans.find("Star")->second.x
 		&& Trans.find("Choice")->second.y <= Trans.find("Star")->second.y)

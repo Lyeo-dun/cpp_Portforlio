@@ -12,16 +12,19 @@ Option::~Option()
 
 
 void Option::Initialize()
-{
-	Option_Button[0] = (char*)"메뉴 이동";
-	Option_Trans[0].Position = Vector3(CONSOL_MAX_WIDTH / 2 - (float)(strlen(Option_Button[0]) / 2) - (float)strlen(Option_Button[0]), 23);
+{	
+	Text.push_back((char*)"메뉴 이동");
+	Text.push_back((char*)"게임 시작");
 
-	Option_Button[1] = (char*)"게임 시작";
-	Option_Trans[1].Position = Vector3(CONSOL_MAX_WIDTH / 2 - (float)(strlen(Option_Button[1]) / 2) + (float)strlen(Option_Button[1]), 23);
+	vector<Vector3> OptionTrans;
+	OptionTrans.push_back(Vector3(CONSOL_MAX_WIDTH / 2 - (float)(strlen(Text[0]) / 2) - (float)strlen(Text[0]), 23));
+	OptionTrans.push_back(Vector3(CONSOL_MAX_WIDTH / 2 - (float)(strlen(Text[1]) / 2) + (float)strlen(Text[1]), 23));
+
+	TextPos = OptionTrans;
 
 	Star = (char*)"★";
-	Star_Trans.Position = Option_Trans[0].Position;
-	Star_Trans.Position.x -= 2;
+	StarPos = OptionTrans[0];
+	StarPos.x -= 2;
 	StarColor = rand() % 3 + 10;
 
 	Choice = 1;
@@ -59,13 +62,15 @@ void Option::Update()
 
 		if (Choice <= 1)
 		{
-			Star_Trans.Position = Option_Trans[0].Position;
-			Star_Trans.Position.x -= 2;
+			vector<Vector3>::iterator iter = TextPos.begin();
+			StarPos = TextPos[0];
+			StarPos.x -= 2;
 		}
 		if (Choice >= 2)
 		{
-			Star_Trans.Position = Option_Trans[1].Position;
-			Star_Trans.Position.x -= 2;
+			vector<Vector3>::iterator iter = TextPos.end() - 1;
+			StarPos = TextPos[1];
+			StarPos.x -= 2;
 		}
 
 		Time = GetTickCount64();
@@ -104,14 +109,21 @@ void Option::Render()
 	DoubleBuffer::GetInstance()->WriteBuffer(17, 19, (char*)" : 길");
 	DoubleBuffer::GetInstance()->WriteBuffer(17, 20, (char*)"k: 열쇠");
 
-	for (int i = 0; i < 2; ++i)
 	{
-		DoubleBuffer::GetInstance()->WriteBuffer((int)Option_Trans[i].Position.x, 23, Option_Button[i], 8);
-		if(i == Choice - 1)
-			DoubleBuffer::GetInstance()->WriteBuffer((int)Option_Trans[i].Position.x, 23, Option_Button[i]);
-	}
+		vector<char*>::iterator titer = Text.begin();
+		vector<Vector3>::iterator piter = TextPos.begin();
 
-	DoubleBuffer::GetInstance()->WriteBuffer((int)Star_Trans.Position.x, (int)Star_Trans.Position.y, Star, StarColor);
+		for (int i = 0; i < Text.size(); ++i)
+		{
+			DoubleBuffer::GetInstance()->WriteBuffer((int)(*piter).x, (int)(*piter).y, (*titer), 8);
+			if(i == Choice - 1)
+				DoubleBuffer::GetInstance()->WriteBuffer((int)(*piter).x, (int)(*piter).y, (*titer));
+
+			titer++;
+			piter++;
+		}
+	}
+	DoubleBuffer::GetInstance()->WriteBuffer((int)StarPos.x, (int)StarPos.y, Star, StarColor);
 }
 
 void Option::Release()
