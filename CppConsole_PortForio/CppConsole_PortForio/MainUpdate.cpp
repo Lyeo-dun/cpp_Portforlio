@@ -14,7 +14,7 @@ MainUpdate::~MainUpdate()
 void MainUpdate::Initialize()
 {
 	DoubleBuffer::GetInstance()->CreateBuffer(CONSOL_MAX_WIDTH, CONSOL_MAX_HEIGHT);
-	SceneManager::GetInstance()->SetScene(SCENEID_OPTION);
+	SceneManager::GetInstance()->SetScene(SCENEID_STAGE);
 }
 
 void MainUpdate::Update()

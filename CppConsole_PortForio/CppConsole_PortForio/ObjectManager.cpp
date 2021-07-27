@@ -325,12 +325,12 @@ void ObjectManager::Render()
 				}
 			}
 
-			for (int i = 0; i < 4; ++i)
+			for (vector<Object*>::iterator iter = vec_Key.begin(); iter != vec_Key.end(); ++iter)
 			{
-				if (vec_Key[i] != nullptr)
+				if ((*iter) != nullptr)
 				{
-					if (MathManager::GetDistance(PlayerPos, vec_Key[i]->GetPosition()) <= 5)
-						vec_Key[i]->Render();
+					if (MathManager::GetDistance(PlayerPos, (*iter)->GetPosition()) <= 5)
+						(*iter)->Render();
 				}
 			}
 
