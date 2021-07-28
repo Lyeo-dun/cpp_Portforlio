@@ -27,8 +27,8 @@ void KeyUi::Initialize()
 
 	AfterKeyCount = 0;
 
-	Time.insert(make_pair("Frame", GetTickCount64()));
-	Time.insert(make_pair("AddCountTime", GetTickCount64()));
+	m_Time[0] = GetTickCount64();
+	m_Time[1] = GetTickCount64();
 	checkAddTime = false;
 }
 
@@ -36,7 +36,7 @@ void KeyUi::Update()
 {
 	if (isAni)
 	{
-			if (Time.find("Frame")->second + 50 < GetTickCount64())
+			if (m_Time[0] + 50 < GetTickCount64())
 			{
 				if (KeyPos.x < TransInfo.Position.x - 2)
 				{
@@ -59,9 +59,9 @@ void KeyUi::Update()
 						checkAddTime = true;
 						Color = EatKeyColor;
 
-						Time.find("AddCountTime")->second = GetTickCount64();
+						m_Time[1] = GetTickCount64();
 					}
-					if (Time.find("AddCountTime")->second + 300 < GetTickCount64())
+					if (m_Time[1] + 300 < GetTickCount64())
 					{
 						KeyCount = AfterKeyCount;
 						Color = 15;
@@ -71,7 +71,7 @@ void KeyUi::Update()
 					}
 				}
 
-				Time.find("Frame")->second = GetTickCount64();
+				m_Time[0] = GetTickCount64();
 		}
 	}
 }
