@@ -96,6 +96,7 @@ public:
 	bool GetClear() { return Clear; }
 
 	Object* GetKey(int _index) { return vec_Key[_index]; }
+	
 	//rect view
 	////Draw offset
 	//Vector3 offset;
@@ -106,6 +107,7 @@ public:
 	//int DrawEndY;
 	//int currentDrawX;
 	//int currentDrawY;
+	
 	void BreakWall(int _index);
 
 private:
