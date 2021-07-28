@@ -152,7 +152,7 @@
     <ClInclude Include="StarParticle.h" />
     <ClInclude Include="TextMessage.h" />
     <ClInclude Include="UnderMessage.h" />
-    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Struct.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DoubleBuffer.cpp" />

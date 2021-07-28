@@ -11,7 +11,9 @@ class KeyUi : public Object
 	int AfterKeyCount;
 	int EatKeyColor;
 
-	map<string, ULONGLONG> Time;
+	//map<string, ULONGLONG> Time;
+	ULONGLONG m_Time[2];
+
 	bool checkAddTime;
 public:
 	void AddKeyCount() { AfterKeyCount += 1; }

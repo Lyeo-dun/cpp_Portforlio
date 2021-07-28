@@ -141,14 +141,12 @@ void Menu::Update()
 
 void Menu::Render()
 {
+	int i = 0;
 	//로고 출력
+	for (vector<char*>::iterator iter = Text.find("Logo")->second.begin(); iter != Text.find("Logo")->second.end(); ++iter)
 	{
-		int i = 0;
-		for (vector<char*>::iterator iter = Text.find("Logo")->second.begin(); iter != Text.find("Logo")->second.end(); ++iter)
-		{
-			DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Logo")->second.x, (int)Trans.find("Logo")->second.y + i, *iter, 15);
-			i++;
-		}
+		DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Logo")->second.x, (int)Trans.find("Logo")->second.y + i, *iter, 15);
+		i++;
 	}
 
 	for (vector<char*>::iterator iter = Text.find("Star")->second.begin(); iter != Text.find("Star")->second.end(); ++iter)
@@ -159,7 +157,8 @@ void Menu::Render()
 	//메뉴 출력
 	if (ViewChioce)
 	{
-		int i = 0;
+		i = 0;
+
 		for (vector<char*>::iterator iter = Text.find("Choice")->second.begin(); iter != Text.find("Choice")->second.end(); ++iter)
 		{
 			DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Choice")->second.x, int(Trans.find("Choice")->second.y + i), *iter, 8);

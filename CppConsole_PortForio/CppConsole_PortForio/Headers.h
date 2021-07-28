@@ -10,5 +10,5 @@ using namespace std;
 
 #include "Constant.h"
 #include "Enum.h"
-#include "Vector3.h"
+#include "Struct.h"
 #include "Release.h"
