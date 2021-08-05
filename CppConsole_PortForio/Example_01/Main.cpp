@@ -97,9 +97,9 @@ void KorSort()
 {
 	for (list<StudentInfo>::iterator iter = StudentList.begin(); iter != StudentList.end(); ++iter)
 	{
-		for (list<StudentInfo>::iterator iter2 = StudentList.begin(); iter2 != StudentList.end(); ++iter2)
+		for (list<StudentInfo>::iterator iter2 = iter; iter2 != StudentList.end(); ++iter2)
 		{
-			if ((*iter).Kor > (*iter2).Kor)
+			if ((*iter).Kor < (*iter2).Kor)
 			{
 				ScoreSwap((*iter), (*iter2));
 			}
@@ -110,9 +110,9 @@ void EngSort()
 {
 	for (list<StudentInfo>::iterator iter = StudentList.begin(); iter != StudentList.end(); ++iter)
 	{
-		for (list<StudentInfo>::iterator iter2 = StudentList.begin(); iter2 != StudentList.end(); ++iter2)
+		for (list<StudentInfo>::iterator iter2 = iter; iter2 != StudentList.end(); ++iter2)
 		{
-			if ((*iter).Eng > (*iter2).Eng)
+			if ((*iter).Eng < (*iter2).Eng)
 			{
 				ScoreSwap((*iter), (*iter2));
 			}
@@ -123,9 +123,9 @@ void MathSort()
 {
 	for (list<StudentInfo>::iterator iter = StudentList.begin(); iter != StudentList.end(); ++iter)
 	{
-		for (list<StudentInfo>::iterator iter2 = StudentList.begin(); iter2 != StudentList.end(); ++iter2)
+		for (list<StudentInfo>::iterator iter2 = iter; iter2 != StudentList.end(); ++iter2)
 		{
-			if ((*iter).Math > (*iter2).Math)
+			if ((*iter).Math < (*iter2).Math)
 			{
 				ScoreSwap((*iter), (*iter2));
 			}
