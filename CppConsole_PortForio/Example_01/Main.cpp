@@ -36,7 +36,6 @@ int main(void)
 	LoadDate();
 
 
-
 	//for (list<StudentInfo>::iterator iter = StudentList.begin();
 	//	iter != StudentList.end(); ++iter)
 	//{
@@ -48,9 +47,6 @@ int main(void)
 
 	//** 읽어온 데이터를 각각의 점수에 따라 내림차순 정렬을 할것이다.
 	//** 국어, 영어, 수학 점수별로 선택한 후 선택된 과목의 점수를 내림차순 정렬할것.
-
-	//while (true)
-	//{
 	{
 
 		list<StudentInfo*> StdSortList;
@@ -94,7 +90,7 @@ int main(void)
 			break;
 		}
 		
-
+		//정렬한 것 출력
 		/*for (list<StudentInfo*>::iterator iter = StdSortList.begin();
 			iter != StdSortList.end(); ++iter)
 		{
@@ -103,13 +99,9 @@ int main(void)
 			cout << "영어 점수 : " << (*iter)->Eng << endl;
 			cout << "수학 점수 : " << (*iter)->Math << endl << endl;
 		}*/
-
-	//	system("pause");
-	//	system("cls");
-	//}
 	 
 
-	//map에 과목별로 push
+		//map에 과목별로 push
 		for (list<StudentInfo*>::iterator iter = StdSortList.begin();
 			iter != StdSortList.end(); ++iter)
 		{
@@ -118,6 +110,7 @@ int main(void)
 			InputMap("수학", (*iter)->Math);
 		}
 
+		//맵 출력
 		for (map<string, list<int>>::iterator iter = StudentMap.begin();
 			iter != StudentMap.end(); ++iter)
 		{
