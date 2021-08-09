@@ -17,7 +17,7 @@ void HitPoint::Initialize()
 	texture = (char*)"/////////";
 
 	TransInfo.Scale = Vector3((float)strlen(texture), 1);
-	TransInfo.Position = Vector3(ObjectManager::GetInstance()->GetGameBar()->GetPosition().x, ObjectManager::GetInstance()->GetGameBar()->GetPosition().y);
+	TransInfo.Position = Vector3(GETSINGLETON(ObjectManager)->GetGameBar()->GetPosition().x, GETSINGLETON(ObjectManager)->GetGameBar()->GetPosition().y);
 
 	Color = 4;
 }
@@ -50,8 +50,8 @@ void HitPoint::Update()
 }
 
 void HitPoint::Render()
-{
-	DoubleBuffer::GetInstance()->WriteBuffer(int(TransInfo.Position.x - TransInfo.Scale.x/2), int(TransInfo.Position.y - TransInfo.Scale.y / 2), texture, Color);
+{	
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(int(TransInfo.Position.x - TransInfo.Scale.x/2), int(TransInfo.Position.y - TransInfo.Scale.y / 2), texture, Color);
 }
 
 void HitPoint::Release()

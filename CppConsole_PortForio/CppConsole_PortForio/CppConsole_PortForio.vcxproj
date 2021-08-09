@@ -148,6 +148,7 @@
     <ClInclude Include="Release.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StarParticle.h" />
     <ClInclude Include="TextMessage.h" />

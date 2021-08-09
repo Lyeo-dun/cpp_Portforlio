@@ -42,7 +42,7 @@ void Logo::Update()
 
 	if (GetAsyncKeyState(VK_RETURN)) 
 	{
-		SceneManager::GetInstance()->SetScene(SCENEID_MENU);
+		GETSINGLETON(SceneManager)->SetScene(SCENEID_MENU);
 	}
 
 }
@@ -52,13 +52,13 @@ void Logo::Render()
 	{
 		int i = 0;
 		for (vector<char*>::iterator iter = LogoText.begin(); iter != LogoText.end(); ++iter)
-		{
-			DoubleBuffer::GetInstance()->WriteBuffer((int)TransInfo.Position.x, (int)TransInfo.Position.y + i, *iter, 15);
+		{	
+			GETSINGLETON(DoubleBuffer)->WriteBuffer((int)TransInfo.Position.x, (int)TransInfo.Position.y + i, *iter, 15);
 			i++;
 		}
 	}
-	DoubleBuffer::GetInstance()->WriteBuffer((int)(TransInfo.Position.x + strlen(LogoText[6]) - 1), (int)TransInfo.Position.y + 6, (char*)"★", StarColor);
-	DoubleBuffer::GetInstance()->WriteBuffer(
+	GETSINGLETON(DoubleBuffer)->WriteBuffer((int)(TransInfo.Position.x + strlen(LogoText[6]) - 1), (int)TransInfo.Position.y + 6, (char*)"★", StarColor);
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(
 		int(41 - strlen((char*)"게임을 시작하려면 엔터키를 눌러주세요!")/2), (int)TransInfo.Position.y + 8,
 		(char*)"게임을 시작하려면 엔터키를 눌러주세요!", StarColor);
 }

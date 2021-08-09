@@ -37,7 +37,7 @@ void StarParticle::Update()
 			TransInfo.Position.y += Direction.y * Speed;
 		}
 
-		if (MathManager::GetDistance(TransInfo.Position, EndingManager::GetInstance()->GetPlayerPos()) > 5)
+		if (MathManager::GetDistance(TransInfo.Position, GETSINGLETON(EndingManager)->GetPlayerPos()) > 5)
 		{
 			inParticleAni = false;
 		}
@@ -48,7 +48,8 @@ void StarParticle::Render()
 {
 	if (inParticleAni)
 	{
-		DoubleBuffer::GetInstance()->WriteBuffer((int)TransInfo.Position.x * 2, (int)TransInfo.Position.y, Texture, Color);
+		
+		GETSINGLETON(DoubleBuffer)->WriteBuffer((int)TransInfo.Position.x * 2, (int)TransInfo.Position.y, Texture, Color);
 	}
 }
 

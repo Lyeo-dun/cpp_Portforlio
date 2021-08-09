@@ -27,7 +27,7 @@ void EndingPlayer::Update()
 {
 	if (PlayerAniStartTime + 1000 < GetTickCount64())
 	{
-		if (EndingManager::GetInstance()->GetPlayerAni())
+		if (GETSINGLETON(EndingManager)->GetPlayerAni())
 		{
 			if (TransInfo.Position.x > (41 / 2))
 			{
@@ -40,7 +40,7 @@ void EndingPlayer::Update()
 
 			if (TransInfo.Position.x <= (41 / 2) && TransInfo.Position.y <= (21 / 2))
 			{
-				EndingManager::GetInstance()->AddViewRange(Speed);
+				GETSINGLETON(EndingManager)->AddViewRange(Speed);
 			}
 		}
 	}
@@ -48,7 +48,7 @@ void EndingPlayer::Update()
 
 void EndingPlayer::Render()
 {
-	DoubleBuffer::GetInstance()->WriteBuffer((int)TransInfo.Position.x * 2, (int)TransInfo.Position.y, Texture, Color);
+	GETSINGLETON(DoubleBuffer)->WriteBuffer((int)TransInfo.Position.x * 2, (int)TransInfo.Position.y, Texture, Color);
 }
 
 void EndingPlayer::Release()

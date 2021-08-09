@@ -14,15 +14,15 @@ Stage::~Stage()
 
 void Stage::Initialize()
 {
-	ObjectManager::GetInstance()->Initialize();
+	GETSINGLETON(ObjectManager)->Initialize();
 	checkTime = false;
 }
 
 void Stage::Update()
 {
-	ObjectManager::GetInstance()->Update();
+	GETSINGLETON(ObjectManager)->Update();
 
-	if (ObjectManager::GetInstance()->GetClear())
+	if (GETSINGLETON(ObjectManager)->GetClear())
 	{
 		if (!checkTime)
 		{
@@ -31,17 +31,17 @@ void Stage::Update()
 		}
 		if (Time + 200 < GetTickCount64())
 		{
-			SceneManager::GetInstance()->SetScene(SCENEID_EXIT);
+			GETSINGLETON(SceneManager)->SetScene(SCENEID_EXIT);
 		}
 	}
 }
 
 void Stage::Render()
 {
-	ObjectManager::GetInstance()->Render();
+	GETSINGLETON(ObjectManager)->Render();
 }
 
 void Stage::Release()
 {
-	ObjectManager::GetInstance()->Release();
+	GETSINGLETON(ObjectManager)->Release();
 }

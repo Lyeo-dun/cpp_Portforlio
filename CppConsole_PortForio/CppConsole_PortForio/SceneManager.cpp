@@ -5,7 +5,6 @@
 #include "Option.h"
 #include "Ending.h"
 
-SceneManager* SceneManager::m_pInstance = nullptr;
 SceneManager::SceneManager()
 {
 }
@@ -52,4 +51,5 @@ void SceneManager::Render()
 void SceneManager::Release()
 {
 	SceneState->Release();
+	DESTROYSINGLETON(SceneManager);
 }

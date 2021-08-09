@@ -81,17 +81,17 @@ void KeyUi::Render()
 	if (isAni)
 	{
 		map<string, char*>::iterator iter = texture.find("Ani");
-		DoubleBuffer::GetInstance()->WriteBuffer(
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
 			(int)KeyPos.x * 2 + 4,
 			(int)KeyPos.y, (*iter).second, Color);
 	}
 
 	map<string, char*>::iterator iter = texture.find("Static");
-	DoubleBuffer::GetInstance()->WriteBuffer(
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(
 		(int)TransInfo.Position.x * 2,
 		(int)TransInfo.Position.y, (*iter).second, Color);
 	
-	DoubleBuffer::GetInstance()->WriteBuffer(
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(
 		(int)TransInfo.Position.x * 2 + 4,
 		(int)TransInfo.Position.y, KeyCount, 15);
 

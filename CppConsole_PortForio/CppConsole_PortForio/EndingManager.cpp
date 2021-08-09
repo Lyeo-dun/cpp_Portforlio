@@ -7,8 +7,6 @@
 #include "TextMessage.h"
 
 
-EndingManager* EndingManager::m_pInstance = nullptr;
-
 EndingManager::EndingManager()
 {
 }
@@ -190,23 +188,23 @@ void EndingManager::Render()
 					switch (Map[y][x])
 					{
 					case 0:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡¤", 8);
 						break;
 					case 1:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡á", 4);
 						break;
 					case 2:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡Û", 10);
 						break;
 					case 3:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡Ü", 11);
 						break;
 					case 7:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡á", 9);
 						break;
 					}
@@ -226,23 +224,23 @@ void EndingManager::Render()
 					switch (Map[y][x])
 					{
 					case 0:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡¤", 8);
 						break;
 					case 1:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡á", 4);
 						break;
 					case 2:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡Û", 10);
 						break;
 					case 3:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡Ü", 11);
 						break;
 					case 7:
-						DoubleBuffer::GetInstance()->WriteBuffer(
+						GETSINGLETON(DoubleBuffer)->WriteBuffer(
 							(int)x * 2, (int)y, (char*)"¡á", 9);
 						break;
 					}
@@ -269,14 +267,14 @@ void EndingManager::Render()
 
 		for (int i = 0; i < 2; ++i)
 		{
-			DoubleBuffer::GetInstance()->WriteBuffer(int(Choice_Pos.x - strlen(ChoiceMenu[i])/2), int((Choice_Pos.y - 1) + i), ChoiceMenu[i], 8);
+			GETSINGLETON(DoubleBuffer)->WriteBuffer(int(Choice_Pos.x - strlen(ChoiceMenu[i])/2), int((Choice_Pos.y - 1) + i), ChoiceMenu[i], 8);
 			if (i == star_y - 1)
 			{
-				DoubleBuffer::GetInstance()->WriteBuffer(int(Choice_Pos.x - strlen(ChoiceMenu[i])/2), int((Choice_Pos.y - 1) + i), ChoiceMenu[i]);
+				GETSINGLETON(DoubleBuffer)->WriteBuffer(int(Choice_Pos.x - strlen(ChoiceMenu[i])/2), int((Choice_Pos.y - 1) + i), ChoiceMenu[i]);
 			}
 		}
 
-		DoubleBuffer::GetInstance()->WriteBuffer(int(Star_Pos.x), int(Star_Pos.y), Star, Star_Color);
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(int(Star_Pos.x), int(Star_Pos.y), Star, Star_Color);
 	}
 
 }
@@ -302,6 +300,8 @@ void EndingManager::Release()
 	}
 
 	SAFE_RELEASE(m_pTextMessage);
+
+	DESTROYSINGLETON(EndingManager);
 }
 
 Vector3 EndingManager::GetPlayerPos() { return m_pPlayer->GetPosition(); }

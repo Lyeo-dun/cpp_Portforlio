@@ -14,18 +14,18 @@ Ending::~Ending()
 
 void Ending::Initialize()
 {
-	EndingManager::GetInstance()->Initialize();
+	GETSINGLETON(EndingManager)->Initialize();
 }
 
 void Ending::Update()
 {
-	EndingManager::GetInstance()->Update();
+	GETSINGLETON(EndingManager)->Update();
 
-	if (EndingManager::GetInstance()->GetChoice() == 1)
+	if (GETSINGLETON(EndingManager)->GetChoice() == 1)
 	{
-		SceneManager::GetInstance()->SetScene(SCENEID_MENU);
+		GETSINGLETON(SceneManager)->SetScene(SCENEID_MENU);
 	}
-	if (EndingManager::GetInstance()->GetChoice() == 2)
+	if (GETSINGLETON(EndingManager)->GetChoice() == 2)
 	{
 		exit(NULL);
 	}
@@ -33,10 +33,10 @@ void Ending::Update()
 
 void Ending::Render()
 {
-	EndingManager::GetInstance()->Render();	
+	GETSINGLETON(EndingManager)->Render();	
 }
 
 void Ending::Release()
 {
-	EndingManager::GetInstance()->Release();
+	GETSINGLETON(EndingManager)->Release();
 }

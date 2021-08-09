@@ -1,8 +1,5 @@
 #include "DoubleBuffer.h"
 
-
-DoubleBuffer* DoubleBuffer::m_pInstance = NULL;
-
 DoubleBuffer::DoubleBuffer(void) : m_iBufferIndex(0)
 {
 	

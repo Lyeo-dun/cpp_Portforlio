@@ -27,7 +27,7 @@ void MiniGameBar::Update()
 
 void MiniGameBar::Render()
 {
-	DoubleBuffer::GetInstance()->WriteBuffer((int)(TransInfo.Position.x - TransInfo.Scale.x / 2),
+	GETSINGLETON(DoubleBuffer)->WriteBuffer((int)(TransInfo.Position.x - TransInfo.Scale.x / 2),
 		(int)(TransInfo.Position.y - TransInfo.Scale.y / 2), texture, Color);
 }
 

@@ -10,8 +10,6 @@
 #include "KeyUi.h"
 #include "SceneManager.h"
 
-ObjectManager* ObjectManager::m_pInstance = nullptr;
-
 ObjectManager::ObjectManager()
 {
 	m_isMiniGameMode = false;
@@ -202,23 +200,24 @@ void ObjectManager::Render()
 				switch (Map[DrawStart_y][DrawStart_x])
 				{
 				case 0:
-					DoubleBuffer::GetInstance()->WriteBuffer(
+					
+					->WriteBuffer(
 						DrawStart_x * 2, DrawStart_y, (char*)"¡¤", 8);
 					break;
 				case 1:
-					DoubleBuffer::GetInstance()->WriteBuffer(
+					GETSINGLETON(DoubleBuffer)->WriteBuffer(
 						DrawStart_x * 2, DrawStart_y, (char*)"¡á", 4);
 					break;
 				case 2:
-					DoubleBuffer::GetInstance()->WriteBuffer(
+					GETSINGLETON(DoubleBuffer)->WriteBuffer(
 						DrawStart_x * 2, DrawStart_y, (char*)"¡Û", 10);
 					break;
 				case 3:
-					DoubleBuffer::GetInstance()->WriteBuffer(
+					GETSINGLETON(DoubleBuffer)->WriteBuffer(
 						DrawStart_x * 2, DrawStart_y, (char*)"¡Ü", 11);
 					break;
 				case 4:
-					DoubleBuffer::GetInstance()->WriteBuffer(
+					GETSINGLETON(DoubleBuffer)->WriteBuffer(
 						DrawStart_x * 2, DrawStart_y, (char*)"¢Ò", 15);
 					break;
 				}
@@ -237,23 +236,23 @@ void ObjectManager::Render()
 						switch (Map[y][x])
 						{
 						case 0:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡¤", 8);
 							break;
 						case 1:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡á", 4);
 							break;
 						case 2:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡Û", 10);
 							break;
 						case 3:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡Ü", 11);
 							break;
 						case 7:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡á", 9);
 							break;
 						}
@@ -268,23 +267,23 @@ void ObjectManager::Render()
 								switch (Map[y][x])
 								{
 								case 0:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡¤", 8);
 									break;
 								case 1:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡á", 4);
 									break;
 								case 2:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡Û", 10);
 									break;
 								case 3:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡Ü", 11);
 									break;
 								case 7:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡á", 9);
 									break;
 								}
@@ -299,23 +298,23 @@ void ObjectManager::Render()
 								switch (Map[y][x])
 								{
 								case 0:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡¤", 8);
 									break;
 								case 1:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡á", 4);
 									break;
 								case 2:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡Û", 10);
 									break;
 								case 3:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡Ü", 11);
 									break;
 								case 7:
-									DoubleBuffer::GetInstance()->WriteBuffer(
+									GETSINGLETON(DoubleBuffer)->WriteBuffer(
 										x * 2, y, (char*)"¡á", 9);
 									break;
 								}
@@ -345,23 +344,23 @@ void ObjectManager::Render()
 						switch (Map[y][x])
 						{
 						case 0:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡¤", 8);
 							break;
 						case 1:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡á", 4);
 							break;
 						case 2:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡Û", 10);
 							break;
 						case 3:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡Ü", 11);
 							break;
 						case 7:
-							DoubleBuffer::GetInstance()->WriteBuffer(
+							GETSINGLETON(DoubleBuffer)->WriteBuffer(
 								x * 2, y, (char*)"¡á", 9);
 							break;
 						}
@@ -403,6 +402,8 @@ void ObjectManager::Release()
 	vec_Key.clear();
 	
 	SAFE_RELEASE(m_pKeyUI);
+
+	DESTROYSINGLETON(ObjectManager);
 }
 
 void ObjectManager::BreakWall(int _index)

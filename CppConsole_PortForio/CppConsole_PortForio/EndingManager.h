@@ -1,19 +1,12 @@
 #pragma once
 #include "Headers.h"
+#include "Singleton.h"
 
 class Object;
 class EndingManager
 {
-private:
-	static EndingManager* m_pInstance;
 public:
-	static EndingManager* GetInstance()
-	{
-		if (m_pInstance == nullptr)
-			m_pInstance = new EndingManager;
-
-		return m_pInstance;
-	}
+	DECLARE_SINGLETON(EndingManager)
 
 private:
 	int Map[21][41] =

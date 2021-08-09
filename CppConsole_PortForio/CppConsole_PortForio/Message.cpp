@@ -60,7 +60,7 @@ void Message::Render()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		DoubleBuffer::GetInstance()->WriteBuffer(int(TransInfo.Position.x - TransInfo.Scale.x/2), int(TransInfo.Position.y - TransInfo.Scale.y / 2) + i, Texture[i], Color);
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(int(TransInfo.Position.x - TransInfo.Scale.x/2), int(TransInfo.Position.y - TransInfo.Scale.y / 2) + i, Texture[i], Color);
 	}
 }
 

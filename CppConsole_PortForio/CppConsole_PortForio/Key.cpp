@@ -27,7 +27,7 @@ void Key::Update()
 
 void Key::Render()
 {
-	DoubleBuffer::GetInstance()->WriteBuffer(
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(
 		(int)TransInfo.Position.x * 2,
 		(int)TransInfo.Position.y, texture, Color);
 }

@@ -1,18 +1,12 @@
 #pragma once
 #include "Headers.h"
+#include "Singleton.h"
 
 class DoubleBuffer
 {
-private:
-	static DoubleBuffer* m_pInstance;
 public:
-	static DoubleBuffer* GetInstance()
-	{
-		if (m_pInstance == NULL)
-			m_pInstance = new DoubleBuffer;
+	DECLARE_SINGLETON(DoubleBuffer)
 
-		return m_pInstance;
-	}
 private:
 	int		m_iBufferIndex;		// ¹öÆÛ Index
 	HANDLE	m_HBuffer[2];		// HANDLE

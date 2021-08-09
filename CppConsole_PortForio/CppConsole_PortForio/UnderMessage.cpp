@@ -44,8 +44,8 @@ void UnderMessage::Update()
 		{
 			if (ExitTime + 500 < GetTickCount64())
 			{
-				EndingManager::GetInstance()->SetTextureAni(false);
-				EndingManager::GetInstance()->SetSelectMenu(true);
+				GETSINGLETON(EndingManager)->SetTextureAni(false);
+				GETSINGLETON(EndingManager)->SetSelectMenu(true);
 			}
 		}
 	}
@@ -75,8 +75,8 @@ void UnderMessage::Update()
 void UnderMessage::Render()
 {
 	for (int i = 0; i < 3; i++)
-	{
-		DoubleBuffer::GetInstance()->WriteBuffer(int(TransInfo.Position.x - TransInfo.Scale.x / 2), int(TransInfo.Position.y - TransInfo.Scale.y / 2) + i, Texture[i], Color);
+	{	
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(int(TransInfo.Position.x - TransInfo.Scale.x / 2), int(TransInfo.Position.y - TransInfo.Scale.y / 2) + i, Texture[i], Color);
 	}
 }
 

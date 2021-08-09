@@ -83,10 +83,10 @@ void Option::Update()
 			switch (Choice)
 			{
 			case 1:
-				SceneManager::GetInstance()->SetScene(SCENEID_MENU);
+				GETSINGLETON(SceneManager)->SetScene(SCENEID_MENU);
 				break;
 			case 2:
-				SceneManager::GetInstance()->SetScene(SCENEID_STAGE);
+				GETSINGLETON(SceneManager)->SetScene(SCENEID_STAGE);
 				break;
 			}
 		}
@@ -95,19 +95,21 @@ void Option::Update()
 
 void Option::Render()
 {
-	DoubleBuffer::GetInstance()->WriteBuffer(CONSOL_MAX_WIDTH/2 - (int)(strlen((char*)"게임 설명")/2), 4, (char*)"게임 설명");
 	
-	DoubleBuffer::GetInstance()->WriteBuffer(15, 8, (char*)"게임 목적");
-	DoubleBuffer::GetInstance()->WriteBuffer(17, 9, (char*)"열쇠를 획득하여 출구를 열고 미로를 탈출하세요!");
 	
-	DoubleBuffer::GetInstance()->WriteBuffer(15, 12, (char*)"조작키");
-	DoubleBuffer::GetInstance()->WriteBuffer(17, 13, (char*)"←↑↓→");
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(CONSOL_MAX_WIDTH/2 - (int)(strlen((char*)"게임 설명")/2), 4, (char*)"게임 설명");
+	
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(15, 8, (char*)"게임 목적");
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(17, 9, (char*)"열쇠를 획득하여 출구를 열고 미로를 탈출하세요!");
+	
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(15, 12, (char*)"조작키");
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(17, 13, (char*)"←↑↓→");
 
-	DoubleBuffer::GetInstance()->WriteBuffer(15, 16, (char*)"오브젝트 설명");
-	DoubleBuffer::GetInstance()->WriteBuffer(17, 17, (char*)"*: 플레이어");
-	DoubleBuffer::GetInstance()->WriteBuffer(17, 18, (char*)"=: 벽");
-	DoubleBuffer::GetInstance()->WriteBuffer(17, 19, (char*)" : 길");
-	DoubleBuffer::GetInstance()->WriteBuffer(17, 20, (char*)"k: 열쇠");
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(15, 16, (char*)"오브젝트 설명");
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(17, 17, (char*)"*: 플레이어");
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(17, 18, (char*)"=: 벽");
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(17, 19, (char*)" : 길");
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(17, 20, (char*)"k: 열쇠");
 
 	{
 		vector<char*>::iterator titer = Text.begin();
@@ -115,15 +117,15 @@ void Option::Render()
 
 		for (int i = 0; i < Text.size(); ++i)
 		{
-			DoubleBuffer::GetInstance()->WriteBuffer((int)(*piter).x, (int)(*piter).y, (*titer), 8);
+			GETSINGLETON(DoubleBuffer)->WriteBuffer((int)(*piter).x, (int)(*piter).y, (*titer), 8);
 			if(i == Choice - 1)
-				DoubleBuffer::GetInstance()->WriteBuffer((int)(*piter).x, (int)(*piter).y, (*titer));
+				GETSINGLETON(DoubleBuffer)->WriteBuffer((int)(*piter).x, (int)(*piter).y, (*titer));
 
 			titer++;
 			piter++;
 		}
 	}
-	DoubleBuffer::GetInstance()->WriteBuffer((int)StarPos.x, (int)StarPos.y, Star, StarColor);
+	GETSINGLETON(DoubleBuffer)->WriteBuffer((int)StarPos.x, (int)StarPos.y, Star, StarColor);
 }
 
 void Option::Release()

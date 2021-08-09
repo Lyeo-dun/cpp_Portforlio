@@ -1,20 +1,13 @@
 #pragma once
 #include "Headers.h"
+#include "Singleton.h"
 
 class Object;
 class ObjectManager
 {
-private:
-	static ObjectManager* m_pInstance;
-
 public:
-	static ObjectManager* GetInstance()
-	{
-		if (m_pInstance == nullptr)
-			m_pInstance = new ObjectManager;
+	DECLARE_SINGLETON(ObjectManager)
 
-		return m_pInstance;
-	}
 private:
 	Object* m_pPlayer;
 	vector<Object*> vec_Key;

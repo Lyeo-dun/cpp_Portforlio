@@ -126,13 +126,13 @@ void Menu::Update()
 			switch (Choice)
 			{
 			case 1:
-				SceneManager::GetInstance()->SetScene(SCENEID_STAGE);
+				GETSINGLETON(SceneManager)->SetScene(SCENEID_STAGE);
 				break;
 			case 2:
-				SceneManager::GetInstance()->SetScene(SCENEID_OPTION);
+				GETSINGLETON(SceneManager)->SetScene(SCENEID_OPTION);
 				break;
 			case 3:
-				SceneManager::GetInstance()->SetScene(SCENEID_EXIT);
+				GETSINGLETON(SceneManager)->SetScene(SCENEID_EXIT);
 				break;
 			}
 		}
@@ -145,13 +145,13 @@ void Menu::Render()
 	//로고 출력
 	for (vector<char*>::iterator iter = Text.find("Logo")->second.begin(); iter != Text.find("Logo")->second.end(); ++iter)
 	{
-		DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Logo")->second.x, (int)Trans.find("Logo")->second.y + i, *iter, 15);
+		GETSINGLETON(DoubleBuffer)->WriteBuffer((int)Trans.find("Logo")->second.x, (int)Trans.find("Logo")->second.y + i, *iter, 15);
 		i++;
 	}
 
 	for (vector<char*>::iterator iter = Text.find("Star")->second.begin(); iter != Text.find("Star")->second.end(); ++iter)
 	{
-		DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Star")->second.x, (int)Trans.find("Star")->second.y, *iter, StarColor);
+		GETSINGLETON(DoubleBuffer)->WriteBuffer((int)Trans.find("Star")->second.x, (int)Trans.find("Star")->second.y, *iter, StarColor);
 	}
 
 	//메뉴 출력
@@ -161,10 +161,10 @@ void Menu::Render()
 
 		for (vector<char*>::iterator iter = Text.find("Choice")->second.begin(); iter != Text.find("Choice")->second.end(); ++iter)
 		{
-			DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Choice")->second.x, int(Trans.find("Choice")->second.y + i), *iter, 8);
+			GETSINGLETON(DoubleBuffer)->WriteBuffer((int)Trans.find("Choice")->second.x, int(Trans.find("Choice")->second.y + i), *iter, 8);
 			if (Choice - 1 == i)
 			{
-				DoubleBuffer::GetInstance()->WriteBuffer((int)Trans.find("Choice")->second.x, int(Trans.find("Choice")->second.y + i), *iter);
+				GETSINGLETON(DoubleBuffer)->WriteBuffer((int)Trans.find("Choice")->second.x, int(Trans.find("Choice")->second.y + i), *iter);
 			}
 			++i;
 		}

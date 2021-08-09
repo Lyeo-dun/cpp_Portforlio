@@ -13,25 +13,25 @@ MainUpdate::~MainUpdate()
 
 void MainUpdate::Initialize()
 {
-	DoubleBuffer::GetInstance()->CreateBuffer(CONSOL_MAX_WIDTH, CONSOL_MAX_HEIGHT);
-	SceneManager::GetInstance()->SetScene(SCENEID_STAGE);
+	GETSINGLETON(DoubleBuffer)->CreateBuffer(CONSOL_MAX_WIDTH, CONSOL_MAX_HEIGHT);
+	GETSINGLETON(SceneManager)->SetScene(SCENEID_LOGO);
 }
 
 void MainUpdate::Update()
 {
-	SceneManager::GetInstance()->Update();
+	GETSINGLETON(SceneManager)->Update();
 
-	DoubleBuffer::GetInstance()->FlippingBuffer();
-	DoubleBuffer::GetInstance()->ClearBuffer();
+	GETSINGLETON(DoubleBuffer)->FlippingBuffer();
+	GETSINGLETON(DoubleBuffer)->ClearBuffer();
 }
 
 void MainUpdate::Render()
 {
-	SceneManager::GetInstance()->Render();
+	GETSINGLETON(SceneManager)->Render();
 }
 
 void MainUpdate::Release()
 {
-	SceneManager::GetInstance()->Release();
-	DoubleBuffer::GetInstance()->DestroyBuffer();
+	GETSINGLETON(SceneManager)->Release();
+	GETSINGLETON(DoubleBuffer)->DestroyBuffer();
 }
