@@ -19,6 +19,6 @@ static void DestroyInstance()				\
 		delete* ppInstance;					\
 		ppInstance = NULL;					\
 	}										\
-}											
+}
 #define GETSINGLETON(type) (*type::GetInstance())
 #define DESTROYSINGLETON(type) (*type::GetInstance())->DestroyInstance()
