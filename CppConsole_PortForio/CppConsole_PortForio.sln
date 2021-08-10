@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1433
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppConsole_PortForio", "CppConsole_PortForio\CppConsole_PortForio.vcxproj", "{D0817B44-3823-417C-8041-96B403D91F22}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Example_01", "Example_01\Example_01.vcxproj", "{3A5DB750-058D-42B6-9F85-E50906053595}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Objectpool", "..\..\..\Googi\Macro\Objectpool\Objectpool.vcxproj", "{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{3A5DB750-058D-42B6-9F85-E50906053595}.Release|x64.Build.0 = Release|x64
 		{3A5DB750-058D-42B6-9F85-E50906053595}.Release|x86.ActiveCfg = Release|Win32
 		{3A5DB750-058D-42B6-9F85-E50906053595}.Release|x86.Build.0 = Release|Win32
+		{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}.Debug|x64.ActiveCfg = Debug|x64
+		{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}.Debug|x64.Build.0 = Debug|x64
+		{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}.Debug|x86.ActiveCfg = Debug|Win32
+		{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}.Debug|x86.Build.0 = Debug|Win32
+		{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}.Release|x64.ActiveCfg = Release|x64
+		{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}.Release|x64.Build.0 = Release|x64
+		{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}.Release|x86.ActiveCfg = Release|Win32
+		{DB81FEF9-7E27-4E59-84A9-9FAB5C20A0F0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
