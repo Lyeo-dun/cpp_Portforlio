@@ -24,42 +24,48 @@ struct ObjectPool
 };
 
 bool check = false;
+int Count = 0;
 
 int main(void)
 {
 	//배열은 리스트, 삭제는 #define safe delete
 	list<ObjectPool*> Array;
 
-	{
-		int i = 0;
-		for (i = 0; i < 128; ++i)
-		{
-			Array.push_back(new ObjectPool);
-		}
-		i = 0;
-		for (list<ObjectPool*>::iterator iter = Array.begin(); iter != Array.end(); ++iter)
-		{
-			(*iter)->Active = false;
-			(*iter)->Key = i;
-			(*iter)->Value = 0;
-
-			i++;
-		}
-	}
-
 	while (true)
 	{
 		system("cls");
 
+		check = false;
+
 		if (GetAsyncKeyState(VK_RETURN))
-			for (list<ObjectPool*>::iterator iter = Array.begin(); iter != Array.end(); ++iter)
+			check = true;
+		
+		if (check)
+		{
+			if (Array.empty())
 			{
-				if (!(*iter)->Active)
+				ObjectPool* pTmp = new ObjectPool(Count++, 0, false);
+				Array.push_back(pTmp);
+			}
+			else 
+			{
+				list<ObjectPool*>::iterator iter = Array.begin();
+				for (iter = Array.begin(); iter != Array.end(); ++iter)
 				{
-					(*iter)->Active = true;
-					break;
+					if (!(*iter)->Active)
+					{
+						(*iter)->Active = true;
+						(*iter)->Value = 0;
+						break;
+					}
+				}
+				if (iter == Array.end())
+				{
+					ObjectPool* pTmp = new ObjectPool(Count++, 0, false);
+					Array.push_back(pTmp);
 				}
 			}
+		}
 
 
 		for (list<ObjectPool*>::iterator iter = Array.begin(); iter != Array.end(); ++iter)
@@ -84,7 +90,6 @@ int main(void)
 	{
 		SAFE_DELETE(*iter);
 	}
-
 	Array.clear();
 
 	return 0;
