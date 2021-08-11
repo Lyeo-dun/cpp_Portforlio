@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <list>
+#include <map>
 #include <string>
 
 using namespace std;
@@ -55,6 +56,7 @@ public:
 	Vector3 SetScale(Vector3 _Scale) { Transinfo.Scale = _Scale; }
 
 public:
+	Object() {}
 	~Object() {}
 };
 
