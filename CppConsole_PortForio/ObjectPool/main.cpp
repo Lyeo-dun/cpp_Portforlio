@@ -37,15 +37,9 @@ public:
 		Transinfo.Position = Vector3(2, 15);
 		Transinfo.Scale = Vector3(Texture.length(), 1);
 	}
-	int Update()
+	void Update()
 	{
 		Transinfo.Position.x += 2.0f;
-
-		if (Transinfo.Position.x >= (120 - Transinfo.Scale.x))
-		{
-			return 1;
-		}
-		return 0;
 	}
 	void Output()
 	{
@@ -54,6 +48,11 @@ public:
 
 		cout << Texture << endl;
 	}
+
+	Vector3 GetPosition() { return Transinfo.Position; }
+	void SetPosition(Vector3 _Pos) { Transinfo.Position = _Pos; }
+	Vector3 GetScale() { return Transinfo.Scale; }
+	Vector3 SetScale(Vector3 _Scale) { Transinfo.Scale = _Scale; }
 
 public:
 	~Object() {}
@@ -110,10 +109,11 @@ int main(void)
 		//Render
 		for (list<Object*>::iterator iter = EnableList.begin(); iter != EnableList.end();/*증감문 따로 제어*/)
 		{
+			(*iter)->Update();
 			(*iter)->Output();
 
 			//오브젝트의 value값이 일정 값 이상이 된다면 
-			if ((*iter)->Update())
+			if ((*iter)->GetPosition().x > 120 - (*iter)->GetScale().x)
 			{
 				//현재 리스트에서 DesableList로 옮김
 				DesableList.push_back((*iter));
@@ -122,6 +122,12 @@ int main(void)
 			}
 			else
 				++iter; //증감문
+		}
+
+		{
+			string descount = "Desable size: ";
+			descount += to_string(DesableList.size());
+			Output(4, 2, descount);
 		}
 
 		Sleep(50);
