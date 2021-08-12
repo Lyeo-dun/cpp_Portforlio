@@ -130,6 +130,9 @@ int main(void)
 			string descount = "Desable size: ";
 			descount += to_string(DesableList.size());
 			Output(4, 2, descount);
+
+			descount = "Enable size: " + to_string(EnableList.size());
+			Output(4, 3, descount);
 		}
 
 		Sleep(50);
